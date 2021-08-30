@@ -1,23 +1,23 @@
 package com.maturalac.maturalacservice.data;
 
-import com.maturalac.maturalacservice.data.entity.Question;
-import com.maturalac.maturalacservice.data.entity.SavedFile;
-import com.maturalac.maturalacservice.data.entity.SuperQuestion;
+import com.maturalac.maturalacservice.data.entity.*;
 import com.maturalac.maturalacservice.data.entity.util.AnswerType;
 import com.maturalac.maturalacservice.data.entity.util.FileType;
 import com.maturalac.maturalacservice.data.repository.QuestionRepository;
 import com.maturalac.maturalacservice.data.repository.SavedFileRepository;
+import com.maturalac.maturalacservice.data.repository.SubjectYearRelationRepository;
 import com.maturalac.maturalacservice.data.repository.SuperQuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.List;
+
 @Slf4j
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 public class RepositoryTests {
     @Autowired
@@ -26,6 +26,8 @@ public class RepositoryTests {
     private SuperQuestionRepository superQuestionRepository;
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private SubjectYearRelationRepository subjectYearRelationRepository;
 
     @Test
     public void testFilesDBStorage() {
@@ -96,6 +98,29 @@ public class RepositoryTests {
         Question savedQ2 = this.questionRepository.save(q1);
 
         Assertions.assertEquals(savedSq, savedQ2.getSuperQuestion());
+    }
+
+    @Test
+    public void testSubjectYearRelationRepository() {
+        Subject s = new Subject();
+        s.setSubjectName("Matematika");
+        ExamYear ey = new ExamYear();
+        ey.setExamName("2021. zima");
+
+        SubjectYearRelation syr = new SubjectYearRelation();
+        syr.setExamYear(ey);
+        syr.setSubject(s);
+
+        SubjectYearRelation savedSyr = this.subjectYearRelationRepository.save(syr);
+
+        Assertions.assertNotNull(savedSyr);
+
+        List<SubjectYearRelation> found = this.subjectYearRelationRepository
+                .findAllBySubject(savedSyr.getSubject());
+        Assertions.assertTrue(found.stream().map(SubjectYearRelation::getSubject)
+                .map(Subject::getSubjectName).anyMatch(sn -> sn.equals(s.getSubjectName())));
+        Assertions.assertTrue(found.stream().map(SubjectYearRelation::getExamYear)
+                .map(ExamYear::getExamName).anyMatch(en -> en.equals(ey.getExamName())));
     }
 
 }

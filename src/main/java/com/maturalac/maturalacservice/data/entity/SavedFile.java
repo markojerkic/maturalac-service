@@ -12,12 +12,15 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name="file_name", columnNames="file_name")
+})
 public class SavedFile {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column(name="file_name", unique=true)
+    @Column(name="file_name")
     @NotNull
     private String fileName;
 

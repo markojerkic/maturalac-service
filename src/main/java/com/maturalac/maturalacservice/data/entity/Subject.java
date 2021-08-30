@@ -11,12 +11,15 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(uniqueConstraints = {
+        @UniqueConstraint(name="subject_name", columnNames="subject_name")
+})
 public class Subject {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    @Column(name="subject_name", unique = true, columnDefinition = "text")
+    @Column(name="subject_name", columnDefinition = "text")
     private String subjectName;
 }
