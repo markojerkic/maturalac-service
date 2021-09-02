@@ -26,6 +26,6 @@ public class SavedFile {
 
     @Column(name="file_type")
     @NotNull
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private FileType fileType;
 }

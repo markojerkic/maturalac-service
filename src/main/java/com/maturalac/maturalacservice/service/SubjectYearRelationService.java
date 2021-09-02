@@ -13,6 +13,17 @@ import java.util.List;
 public class SubjectYearRelationService {
     private final SubjectYearRelationRepository subjectYearRelationRepository;
 
+    public List<SubjectYearRelation> getSubjectYearRelations(boolean isPublic) {
+        if (isPublic) {
+            return this.getAllPublicSubjectYearRelations();
+        }
+        return this.getAllSubjectYearRelations();
+    }
+
+    public List<SubjectYearRelation> getAllSubjectYearRelations() {
+        return this.subjectYearRelationRepository.findAll();
+    }
+
     public List<SubjectYearRelation> getAllPublicSubjectYearRelations() {
         return this.subjectYearRelationRepository.findAllByIsPublic(true);
     }
