@@ -1,11 +1,13 @@
 package com.maturalac.maturalacservice.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name="subjects")
 @Data
@@ -22,4 +24,8 @@ public class Subject {
     @NotNull
     @Column(name="subject_name", columnDefinition = "text")
     private String subjectName;
+
+    @OneToMany(mappedBy="subject")
+    @JsonManagedReference
+    private List<SubjectYearRelation> subjectYearRelations;
 }

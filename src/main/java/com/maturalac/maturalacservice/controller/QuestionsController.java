@@ -4,16 +4,14 @@ import com.maturalac.maturalacservice.data.entity.Question;
 import com.maturalac.maturalacservice.service.QuestionsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/questions")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class QuestionsController {
     private final QuestionsService questionsService;
 
