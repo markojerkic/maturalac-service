@@ -9,4 +9,5 @@ import java.util.List;
 public interface SubjectYearRelationRepository extends JpaRepository<SubjectYearRelation, Long> {
     List<SubjectYearRelation> findAllBySubject(Subject subject);
     List<SubjectYearRelation> findAllByIsPublic(boolean isPublic);
+    List<SubjectYearRelation> findAllBySubjectAndAndIsPublic(Subject year, boolean isPublic);
 }

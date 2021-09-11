@@ -1,6 +1,5 @@
 package com.maturalac.maturalacservice.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +24,6 @@ public class Subject {
     @Column(name="subject_name", columnDefinition = "text")
     private String subjectName;
 
-    @OneToMany(mappedBy="subject")
-    @JsonManagedReference
+    @Transient
     private List<SubjectYearRelation> subjectYearRelations;
 }

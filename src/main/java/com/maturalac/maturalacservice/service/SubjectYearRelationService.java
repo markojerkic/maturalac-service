@@ -33,6 +33,15 @@ public class SubjectYearRelationService {
         return this.subjectYearRelationRepository.save(subjectYearRelation);
     }
 
+    public List<SubjectYearRelation> getAllSubjectYearRelationsBySubjectAndPublic(
+            Subject subject, boolean isPublic) {
+        if (isPublic) {
+            return this.subjectYearRelationRepository
+                    .findAllBySubjectAndAndIsPublic(subject, isPublic);
+        }
+        return this.subjectYearRelationRepository.findAllBySubject(subject);
+    }
+
     public SubjectYearRelation saveSubjectYearRelation(SubjectYearRelation subjectYearRelation) {
         return this.subjectYearRelationRepository.save(subjectYearRelation);
     }

@@ -17,7 +17,7 @@ public class SubjectsController {
     private final SubjectsService subjectsService;
 
     @GetMapping()
-    public ResponseEntity<List<Subject>> getAllSubjectYearsRelations(
+    public ResponseEntity<List<Subject>> getAllSubjects(
             @RequestParam(value = "isPublic", required = false, defaultValue = "true")
                     boolean isPublic) {
         List<Subject> subjects = this.subjectsService

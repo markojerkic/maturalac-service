@@ -1,21 +1,30 @@
 package com.maturalac.maturalacservice.service;
 
 import com.maturalac.maturalacservice.data.entity.Subject;
+import com.maturalac.maturalacservice.data.repository.SubjectYearRelationRepository;
 import com.maturalac.maturalacservice.data.repository.SubjectsRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor()
 public class SubjectsService {
     private final SubjectsRepository subjectsRepository;
+    private final SubjectYearRelationService subjectYearRelationService;
+
+    public SubjectsService(SubjectsRepository subjectsRepository,
+                           SubjectYearRelationRepository subjectYearRelationRepository) {
+        this.subjectYearRelationService = new SubjectYearRelationService(subjectYearRelationRepository);
+        this.subjectsRepository = subjectsRepository;
+    }
 
     public List<Subject> getAllSubjects(boolean isPublic) {
-        if (isPublic) {
-            return this.subjectsRepository.findAll();
-        }
-        return this.subjectsRepository.findAll();
+        return this.subjectsRepository.findAll().stream().peek(subject -> subject.setSubjectYearRelations(
+                this.subjectYearRelationService
+                    .getAllSubjectYearRelationsBySubjectAndPublic(subject, isPublic))).filter(subject -> subject.getSubjectYearRelations().size() > 0)
+            .sorted(Comparator.comparing(Subject::getSubjectName))
+                .collect(Collectors.toList());
     }
 }

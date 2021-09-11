@@ -16,6 +16,9 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Slf4j
 //@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
@@ -117,10 +120,22 @@ public class RepositoryTests {
 
         List<SubjectYearRelation> found = this.subjectYearRelationRepository
                 .findAllBySubject(savedSyr.getSubject());
-        Assertions.assertTrue(found.stream().map(SubjectYearRelation::getSubject)
+        assertTrue(found.stream().map(SubjectYearRelation::getSubject)
                 .map(Subject::getSubjectName).anyMatch(sn -> sn.equals(s.getSubjectName())));
-        Assertions.assertTrue(found.stream().map(SubjectYearRelation::getExamYear)
+        assertTrue(found.stream().map(SubjectYearRelation::getExamYear)
                 .map(ExamYear::getExamName).anyMatch(en -> en.equals(ey.getExamName())));
+    }
+
+    @Test
+    @Sql(scripts = "/by_subject_and_public.sql")
+    public void testFindAllBySubjectAndAndIsPublic() {
+        Subject subject = new Subject();
+        subject.setId(1L);
+        List<SubjectYearRelation> found = this.subjectYearRelationRepository.findAllBySubjectAndAndIsPublic(subject, true);
+        found.forEach(syr -> {
+            assertTrue(syr.isPublic());
+            assertEquals(1L, syr.getSubject().getId());
+        });
     }
 
 }
