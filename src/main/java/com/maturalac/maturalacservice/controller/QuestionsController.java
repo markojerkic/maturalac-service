@@ -15,9 +15,9 @@ import java.util.List;
 public class QuestionsController {
     private final QuestionsService questionsService;
 
-    @GetMapping("/{subjectYearRelationId}")
+    @GetMapping()
     public ResponseEntity<List<Question>> getAllQuestionsBySubjectYearRelationId(
-            @PathVariable("subjectYearRelationId") Long subjectYearRelationId) {
+            @RequestParam("syrId") Long subjectYearRelationId) {
         List<Question> questions = this.questionsService.
                 getQuestionsBySubjectYearRelationId(subjectYearRelationId);
         return ResponseEntity.ok(questions);
