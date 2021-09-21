@@ -4,7 +4,16 @@ services:
   maturalac-service:
     image: maturalac/maturalac-service
     ports:
-      - 80:8080
+      - 8080:8080
+    environment:
+      SPRING_APPLICATION_JSON: '{
+              "db.host"  : "db",
+              "spring.profiles.active" : "dockerembbed,oauth-security"
+            }'
+    networks:
+      - maturalac-network
+    depends_on:
+      - db
   db:
     image: mysql:5.7
     volumes:
@@ -17,7 +26,15 @@ services:
       MYSQL_PASSWORD: drzavnamatura
     ports:
       - 1234:3306
+    networks:
+      - maturalac-network
     command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+  maturalac-front:
+    image: maturalac/maturalac-front:latest
+    ports:
+    - 80:80
 
 volumes:
   db_data: {}
+networks:
+  maturalac-network:
