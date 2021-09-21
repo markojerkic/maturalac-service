@@ -18,12 +18,12 @@ public class QuestionsService {
     }
 
     public List<Question> getQuestionsBySubjectYearRelation(SubjectYearRelation subjectYearRelation) {
-        return this.questionRepository.findAllBySubjectYearRelation(subjectYearRelation);
+        return this.questionRepository.findAllBySubjectYearRelationOrderByQuestionNumberAsc(subjectYearRelation);
     }
 
     public List<Question> getQuestionsBySubjectYearRelationId(Long id) {
         SubjectYearRelation subjectYearRelation = new SubjectYearRelation();
         subjectYearRelation.setId(id);
-        return this.questionRepository.findAllBySubjectYearRelation(subjectYearRelation);
+        return this.questionRepository.findAllBySubjectYearRelationOrderByQuestionNumberAsc(subjectYearRelation);
     }
 }
