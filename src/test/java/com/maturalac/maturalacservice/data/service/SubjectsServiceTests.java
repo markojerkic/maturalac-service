@@ -54,7 +54,7 @@ public class SubjectsServiceTests {
                 eq(getMockSubject("Matematika")), eq(true)))
                 .willReturn(Collections.singletonList(syrs.get(0)));
 
-        List<Subject> returnedSubjects = this.subjectsService.getAllSubjects(true);
+        List<Subject> returnedSubjects = this.subjectsService.getAllSubjectsByIsPublic(true);
         verify(subjectYearRelationRepository, times(1))
                 .findAllBySubjectAndAndIsPublic(any(Subject.class), eq(true));
 
@@ -66,7 +66,7 @@ public class SubjectsServiceTests {
         given(subjectYearRelationRepository.findAllBySubject(eq(getMockSubject("Matematika"))))
                 .willReturn(syrs);
         
-        this.subjectsService.getAllSubjects(false);
+        this.subjectsService.getAllSubjectsByIsPublic(false);
         verify(subjectYearRelationRepository, times(1))
                 .findAllBySubject(any(Subject.class));
     }

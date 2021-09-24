@@ -49,4 +49,8 @@ public class SubjectYearRelationService {
     public List<SubjectYearRelation> getAllBySubject(Subject subject) {
         return this.subjectYearRelationRepository.findAllBySubject(subject);
     }
+
+    public List<SubjectYearRelation> getSubjectYearRelationsBySubject(Subject subject) {
+        return this.subjectYearRelationRepository.findAllBySubject(subject);
+    }
 }

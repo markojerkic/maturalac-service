@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/subjects")
@@ -18,10 +19,15 @@ public class SubjectsController {
 
     @GetMapping()
     public ResponseEntity<List<Subject>> getAllSubjects(
-            @RequestParam(value = "isPublic", required = false, defaultValue = "true")
-                    boolean isPublic) {
-        List<Subject> subjects = this.subjectsService
-                .getAllSubjects(isPublic);
+            @RequestParam(required = false)
+                    Optional<Boolean> isPublic) {
+        List<Subject> subjects;
+        if (isPublic.isPresent()) {
+            subjects = this.subjectsService
+                    .getAllSubjectsByIsPublic(isPublic.get());
+        } else {
+            subjects = this.subjectsService.getAllSubjects();
+        }
         return ResponseEntity.ok(subjects);
     }
 }
