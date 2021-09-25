@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 
 @ControllerAdvice
@@ -18,5 +19,11 @@ public class CustomExceptionHandler {
     public ResponseEntity<ErrorResponse> fileNotFoundException(FileNotFoundException e, WebRequest request) {
         return new ResponseEntity<>(new ErrorResponse(e.getLocalizedMessage(), new Date()),
                 HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(IOException.class)
+    public ResponseEntity<ErrorResponse> iOException(FileNotFoundException e, WebRequest request) {
+        return new ResponseEntity<>(new ErrorResponse(e.getLocalizedMessage(), new Date()),
+                HttpStatus.BAD_REQUEST);
     }
 }

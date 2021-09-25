@@ -10,4 +10,6 @@ public interface SavedFileRepository extends JpaRepository<SavedFile, Long> {
     SavedFile findByFileName(String fileName);
     SavedFile findByFileType(FileType fileType);
     List<SavedFile> findAllByFileType(FileType fileType);
+
+    boolean existsByFileName(String fileName);
 }

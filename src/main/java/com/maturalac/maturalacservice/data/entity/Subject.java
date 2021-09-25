@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name="subjects")
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints = {
+@Table(name="subjects", uniqueConstraints = {
         @UniqueConstraint(name="subject_name", columnNames="subject_name")
 })
 public class Subject {
@@ -21,7 +21,7 @@ public class Subject {
     private Long id;
 
     @NotNull
-    @Column(name="subject_name", columnDefinition = "text")
+    @Column(name="subject_name")
     private String subjectName;
 
     @Transient

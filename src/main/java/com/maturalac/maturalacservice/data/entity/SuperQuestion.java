@@ -5,7 +5,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Entity(name="super_questions")
+@Entity
+@Table(name="super_questions")
 @Data
 public class SuperQuestion {
     @Id

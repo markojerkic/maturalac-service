@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity(name="files")
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints = {
+@Table(name="files", uniqueConstraints = {
         @UniqueConstraint(name="file_name", columnNames="file_name")
 })
 public class SavedFile {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="file_name")

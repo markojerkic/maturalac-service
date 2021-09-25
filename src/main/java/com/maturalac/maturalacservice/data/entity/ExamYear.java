@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity(name="exam_year")
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(uniqueConstraints = {
+@Table(name="exam_year", uniqueConstraints = {
         @UniqueConstraint(name="exam_name", columnNames="exam_name")
 })
 public class ExamYear {
@@ -20,6 +20,6 @@ public class ExamYear {
     private Long id;
 
     @NotNull
-    @Column(name="exam_name", columnDefinition = "text")
+    @Column(name="exam_name")
     private String examName;
 }

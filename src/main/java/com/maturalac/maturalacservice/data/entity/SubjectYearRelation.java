@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity(name="subject_year_relation")
+@Entity
+@Table(name="subject_year_relation")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
