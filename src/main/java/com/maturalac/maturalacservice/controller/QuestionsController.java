@@ -23,4 +23,10 @@ public class QuestionsController {
                 getQuestionsBySubjectYearRelationId(subjectYearRelationId);
         return ResponseEntity.ok(questions);
     }
+
+    @PostMapping
+    public ResponseEntity<Question> addNewQuestion(@RequestBody Question question) {
+        Question savedQuestion = this.questionsService.saveNewQuestion(question);
+        return ResponseEntity.ok(savedQuestion);
+    }
 }

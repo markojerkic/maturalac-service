@@ -13,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class QuestionsService {
     private final QuestionRepository questionRepository;
+    private final SubjectYearRelationService subjectYearRelationsService;
 
     public Question saveQuestion(Question question) {
         return this.questionRepository.save(question);
@@ -26,5 +27,12 @@ public class QuestionsService {
         SubjectYearRelation subjectYearRelation = new SubjectYearRelation();
         subjectYearRelation.setId(id);
         return this.questionRepository.findAllBySubjectYearRelationOrderByQuestionNumberAsc(subjectYearRelation);
+    }
+
+    public Question saveNewQuestion(Question question) {
+        SubjectYearRelation subjectYearRelation = this.subjectYearRelationsService
+                .getOrCreateSubjectYearRelation(question.getSubjectYearRelation());
+        question.setSubjectYearRelation(subjectYearRelation);
+        return this.questionRepository.save(question);
     }
 }

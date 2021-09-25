@@ -21,12 +21,12 @@ public class SubjectYearRelation {
     @Column(name="is_public", columnDefinition = "tinyint(1) default 0")
     private boolean isPublic;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
     @JsonBackReference
     @JoinColumn(name="subject_id", nullable = false)
     private Subject subject;
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE)
     @JoinColumn(name="exam_year_id", nullable = false)
     private ExamYear examYear;
 }
