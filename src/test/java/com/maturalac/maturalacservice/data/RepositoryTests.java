@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -130,11 +131,11 @@ public class RepositoryTests {
     @Sql(scripts = "/by_subject_and_public.sql")
     public void testFindAllBySubjectAndAndIsPublic() {
         Subject subject = new Subject();
-        subject.setId(1L);
+        subject.setId(UUID.fromString("54"));
         List<SubjectYearRelation> found = this.subjectYearRelationRepository.findAllBySubjectAndAndIsPublic(subject, true);
         found.forEach(syr -> {
             assertTrue(syr.isPublic());
-            assertEquals(1L, syr.getSubject().getId());
+            assertEquals(UUID.fromString("54"), syr.getSubject().getId());
         });
     }
 

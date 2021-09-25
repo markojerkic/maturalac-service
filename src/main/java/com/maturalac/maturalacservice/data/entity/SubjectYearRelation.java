@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name="subject_year_relation")
@@ -14,8 +15,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class SubjectYearRelation {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue()
+    private UUID id;
 
     @Column(name="is_public", columnDefinition = "tinyint(1) default 0")
     private boolean isPublic;

@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,13 +36,13 @@ public class SubjectsServiceTests {
     private SubjectsService subjectsService;
 
     private Subject getMockSubject(String name) {
-        return new Subject(0L, name, Collections.emptyList());
+        return new Subject(UUID.fromString("54"), name, Collections.emptyList());
     }
 
-    ExamYear ey = new ExamYear(0l, "2020 jesen");
-    List<SubjectYearRelation> syrs = Arrays.asList(new SubjectYearRelation(0l, true,
+    ExamYear ey = new ExamYear(UUID.fromString("54"), "2020 jesen");
+    List<SubjectYearRelation> syrs = Arrays.asList(new SubjectYearRelation(UUID.fromString("54"), true,
                     getMockSubject("Matematika"), ey),
-            new SubjectYearRelation(0l, false,
+            new SubjectYearRelation(UUID.fromString("54"), false,
                     getMockSubject("Matematika"), ey));
     @BeforeEach
     public void setUp() {

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +22,7 @@ public class QuestionsService {
         return this.questionRepository.findAllBySubjectYearRelationOrderByQuestionNumberAsc(subjectYearRelation);
     }
 
-    public List<Question> getQuestionsBySubjectYearRelationId(Long id) {
+    public List<Question> getQuestionsBySubjectYearRelationId(UUID id) {
         SubjectYearRelation subjectYearRelation = new SubjectYearRelation();
         subjectYearRelation.setId(id);
         return this.questionRepository.findAllBySubjectYearRelationOrderByQuestionNumberAsc(subjectYearRelation);

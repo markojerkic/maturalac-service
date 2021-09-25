@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/questions")
@@ -17,7 +18,7 @@ public class QuestionsController {
 
     @GetMapping()
     public ResponseEntity<List<Question>> getAllQuestionsBySubjectYearRelationId(
-            @RequestParam("syrId") Long subjectYearRelationId) {
+            @RequestParam("syrId") UUID subjectYearRelationId) {
         List<Question> questions = this.questionsService.
                 getQuestionsBySubjectYearRelationId(subjectYearRelationId);
         return ResponseEntity.ok(questions);

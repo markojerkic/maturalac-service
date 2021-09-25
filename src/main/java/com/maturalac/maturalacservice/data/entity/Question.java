@@ -5,14 +5,15 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name="questions")
 @Data
 public class Question {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue()
+    private UUID id;
 
     @Column(name="correctAns")
     private Integer correctAnswer;
