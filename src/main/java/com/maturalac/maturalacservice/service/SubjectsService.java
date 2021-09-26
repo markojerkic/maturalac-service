@@ -21,9 +21,15 @@ public class SubjectsService {
     }
 
     public List<Subject> getAllSubjectsByIsPublic(boolean isPublic) {
-        return this.subjectsRepository.findAll().stream().peek(subject -> subject.setSubjectYearRelations(
+        return this.subjectsRepository.findAll().stream()
+                .peek(subject -> subject.setSubjectYearRelations(
                 this.subjectYearRelationService
-                    .getAllSubjectYearRelationsBySubjectAndPublic(subject, isPublic))).filter(subject -> subject.getSubjectYearRelations().size() > 0)
+                    .getAllSubjectYearRelationsBySubjectAndPublic(subject, isPublic)
+                        .stream().map(syr -> {
+                            syr.setSubject(null);
+                            return syr;
+                }).collect(Collectors.toList())
+        )).filter(subject -> subject.getSubjectYearRelations().size() > 0)
             .sorted(Comparator.comparing(Subject::getSubjectName))
                 .collect(Collectors.toList());
     }

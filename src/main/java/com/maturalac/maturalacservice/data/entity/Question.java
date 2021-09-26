@@ -59,7 +59,7 @@ public class Question {
     @JoinColumn(name="subject_exam_year_id")
     private SubjectYearRelation subjectYearRelation;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="super_question_id")
     private SuperQuestion superQuestion;
 }
