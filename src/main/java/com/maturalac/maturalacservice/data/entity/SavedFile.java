@@ -19,7 +19,7 @@ import java.util.UUID;
 public class SavedFile {
     @Id
     @GeneratedValue()
-    private UUID id;
+    private Long id;
 
     @Column(name="file_name")
     @NotNull

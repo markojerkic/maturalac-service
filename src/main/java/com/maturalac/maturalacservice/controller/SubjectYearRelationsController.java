@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/subjectyearrelation")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @AllArgsConstructor()
 public class SubjectYearRelationsController {
     private final SubjectYearRelationService subjectYearRelationService;

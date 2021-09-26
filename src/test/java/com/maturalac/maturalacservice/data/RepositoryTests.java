@@ -131,11 +131,11 @@ public class RepositoryTests {
     @Sql(scripts = "/by_subject_and_public.sql")
     public void testFindAllBySubjectAndAndIsPublic() {
         Subject subject = new Subject();
-        subject.setId(UUID.fromString("54"));
+        subject.setId(0l);
         List<SubjectYearRelation> found = this.subjectYearRelationRepository.findAllBySubjectAndAndIsPublic(subject, true);
         found.forEach(syr -> {
             assertTrue(syr.isPublic());
-            assertEquals(UUID.fromString("54"), syr.getSubject().getId());
+            assertEquals(0l, syr.getSubject().getId());
         });
     }
 

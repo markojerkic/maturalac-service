@@ -18,7 +18,7 @@ import java.util.UUID;
 public class ExamYear {
     @Id
     @GeneratedValue()
-    private UUID id;
+    private Long id;
 
     @NotNull
     @Column(name="exam_name")

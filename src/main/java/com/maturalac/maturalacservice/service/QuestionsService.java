@@ -22,7 +22,7 @@ public class QuestionsService {
         return this.questionRepository.findAllBySubjectYearRelationOrderByQuestionNumberAsc(subjectYearRelation);
     }
 
-    public List<Question> getQuestionsBySubjectYearRelationId(UUID id) {
+    public List<Question> getQuestionsBySubjectYearRelationId(Long id) {
         SubjectYearRelation subjectYearRelation = new SubjectYearRelation();
         subjectYearRelation.setId(id);
         return this.questionRepository.findAllBySubjectYearRelationOrderByQuestionNumberAsc(subjectYearRelation);

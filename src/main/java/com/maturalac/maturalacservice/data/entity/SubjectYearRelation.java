@@ -16,7 +16,7 @@ import java.util.UUID;
 public class SubjectYearRelation {
     @Id
     @GeneratedValue()
-    private UUID id;
+    private Long id;
 
     @Column(name="is_public", columnDefinition = "tinyint(1) default 0")
     private boolean isPublic;

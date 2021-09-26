@@ -18,7 +18,7 @@ public class QuestionsController {
 
     @GetMapping()
     public ResponseEntity<List<Question>> getAllQuestionsBySubjectYearRelationId(
-            @RequestParam("syrId") UUID subjectYearRelationId) {
+            @RequestParam("syrId") Long subjectYearRelationId) {
         List<Question> questions = this.questionsService.
                 getQuestionsBySubjectYearRelationId(subjectYearRelationId);
         return ResponseEntity.ok(questions);

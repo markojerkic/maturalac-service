@@ -36,13 +36,13 @@ public class SubjectsServiceTests {
     private SubjectsService subjectsService;
 
     private Subject getMockSubject(String name) {
-        return new Subject(UUID.fromString("54"), name, Collections.emptyList());
+        return new Subject(0l, name, Collections.emptyList());
     }
 
-    ExamYear ey = new ExamYear(UUID.fromString("54"), "2020 jesen");
-    List<SubjectYearRelation> syrs = Arrays.asList(new SubjectYearRelation(UUID.fromString("54"), true,
+    ExamYear ey = new ExamYear(0l, "2020 jesen");
+    List<SubjectYearRelation> syrs = Arrays.asList(new SubjectYearRelation(0l, true,
                     getMockSubject("Matematika"), ey),
-            new SubjectYearRelation(UUID.fromString("54"), false,
+            new SubjectYearRelation(0l, false,
                     getMockSubject("Matematika"), ey));
     @BeforeEach
     public void setUp() {

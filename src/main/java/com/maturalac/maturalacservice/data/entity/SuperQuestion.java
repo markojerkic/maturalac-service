@@ -12,7 +12,7 @@ import java.util.UUID;
 public class SuperQuestion {
     @Id
     @GeneratedValue()
-    private UUID id;
+    private Long id;
 
     @Column(columnDefinition = "text")
     @NotNull

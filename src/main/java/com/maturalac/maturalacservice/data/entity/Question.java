@@ -13,7 +13,7 @@ import java.util.UUID;
 public class Question {
     @Id
     @GeneratedValue()
-    private UUID id;
+    private Long id;
 
     @Column(name="correctAns")
     private Integer correctAnswer;

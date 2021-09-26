@@ -19,7 +19,7 @@ import java.util.UUID;
 public class Subject {
     @Id
     @GeneratedValue()
-    private UUID id;
+    private Long id;
 
     @NotNull
     @Column(name="subject_name")
