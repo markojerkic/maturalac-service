@@ -3,6 +3,7 @@ package com.maturalac.maturalacservice.controller;
 import com.maturalac.maturalacservice.data.entity.ExamYear;
 import com.maturalac.maturalacservice.data.entity.Question;
 import com.maturalac.maturalacservice.data.entity.Subject;
+import com.maturalac.maturalacservice.data.entity.util.AnswerType;
 import com.maturalac.maturalacservice.service.QuestionsService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -39,13 +41,15 @@ public class QuestionsController {
     @GetMapping("/list")
     public ResponseEntity<Page<Question>> getQuestionsPage(
             Pageable pageable,
-            @RequestParam(defaultValue = "*") String question,
-            @RequestParam(defaultValue = "*") String ansA,
-            @RequestParam(name = "subject", required = false) Subject subject,
-            @RequestParam(name = "examYear", required = false) ExamYear examYear
+            @RequestParam(required = false) Optional<String> question,
+            @RequestParam(required = false) Optional<String> superQuestion,
+            @RequestParam(required = false) Optional<String> answer,
+            @RequestParam(name = "answerType", required = false) Optional<AnswerType> answerType,
+            @RequestParam(name = "subject", required = false) Optional<Subject> subject,
+            @RequestParam(name = "examYear", required = false) Optional<ExamYear> examYear
     ) {
         Page<Question> page = this.questionsService.getQuestionsPage(pageable,
-                question, ansA, subject, examYear);
+                question, superQuestion, answer, answerType, subject, examYear);
         return ResponseEntity.ok(page);
     }
 }
