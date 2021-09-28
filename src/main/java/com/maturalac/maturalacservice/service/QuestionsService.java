@@ -1,19 +1,24 @@
 package com.maturalac.maturalacservice.service;
 
+import com.maturalac.maturalacservice.data.entity.ExamYear;
 import com.maturalac.maturalacservice.data.entity.Question;
+import com.maturalac.maturalacservice.data.entity.Subject;
 import com.maturalac.maturalacservice.data.entity.SubjectYearRelation;
 import com.maturalac.maturalacservice.data.repository.QuestionRepository;
+import com.maturalac.maturalacservice.data.repository.QuestionsPagedRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
 public class QuestionsService {
     private final QuestionRepository questionRepository;
     private final SubjectYearRelationService subjectYearRelationsService;
+    private final QuestionsPagedRepository questionsPagedRepository;
 
     public Question saveQuestion(Question question) {
         return this.questionRepository.save(question);
@@ -34,5 +39,9 @@ public class QuestionsService {
                 .getOrCreateSubjectYearRelation(question.getSubjectYearRelation());
         question.setSubjectYearRelation(subjectYearRelation);
         return this.questionRepository.save(question);
+    }
+
+    public Page<Question> getQuestionsPage(Pageable pageable, String question, String ansA, Subject subject, ExamYear examYear) {
+        return this.questionsPagedRepository.findAll(pageable);
     }
 }
