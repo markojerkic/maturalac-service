@@ -1,5 +1,6 @@
 package com.maturalac.maturalacservice.service;
 
+import com.maturalac.maturalacservice.data.entity.ExamYear;
 import com.maturalac.maturalacservice.data.entity.Subject;
 import com.maturalac.maturalacservice.data.entity.SubjectYearRelation;
 import com.maturalac.maturalacservice.data.repository.SubjectYearRelationRepository;
@@ -52,5 +53,22 @@ public class SubjectYearRelationService {
 
     public List<SubjectYearRelation> getSubjectYearRelationsBySubject(Subject subject) {
         return this.subjectYearRelationRepository.findAllBySubject(subject);
+    }
+
+    public SubjectYearRelation getOrCreateSubjectYearRelation(SubjectYearRelation subjectYearRelation) {
+        SubjectYearRelation syr = this.subjectYearRelationRepository
+                .findBySubjectAndAndExamYear(subjectYearRelation.getSubject(),
+                        subjectYearRelation.getExamYear())
+                .orElseGet(() -> this.saveNewSubjectYearRelation(subjectYearRelation.getSubject(),
+                        subjectYearRelation.getExamYear()));
+        return syr;
+    }
+
+    public SubjectYearRelation saveNewSubjectYearRelation(Subject subject, ExamYear exam) {
+        SubjectYearRelation subjectYearRelation = new SubjectYearRelation();
+        subjectYearRelation.setSubject(subject);
+        subjectYearRelation.setExamYear(exam);
+        subjectYearRelation.setPublic(true);
+        return this.subjectYearRelationRepository.save(subjectYearRelation);
     }
 }

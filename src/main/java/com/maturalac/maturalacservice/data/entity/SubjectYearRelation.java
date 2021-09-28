@@ -21,8 +21,7 @@ public class SubjectYearRelation {
     @Column(name="is_public", columnDefinition = "tinyint(1) default 0")
     private boolean isPublic;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @JsonBackReference
+    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="subject_id", nullable = false)
     private Subject subject;
 
